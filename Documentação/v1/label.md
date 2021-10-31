@@ -1,0 +1,3 @@
+- **DCU** - Diagrama de Caso de Uso;
+- **DC** - Diagrama de Componente;
+- **DI** - Diagrama de Instalação.
