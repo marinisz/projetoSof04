@@ -1,0 +1,8 @@
+UC1-Criar cadastro (Vinícius)
+UC2-Receber email de transação
+UC3-Logar (Dantas)
+UC4-Cadastrar vantagem
+UC5-Gerar cupom (Vinícius)
+UC6-Resgatar vantagem (Dantas)
+UC7-Enviar moeda (Dantas)
+UC8-Consultar Extrato (Vinícius)
