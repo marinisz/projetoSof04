@@ -1,0 +1,26 @@
+{
+  "name": "student-coin",
+  "version": "1.0.0",
+  "description": "Laboratório 04 - Sprint 03",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --inspect --transpile-only src/app.ts",
+    "start": "node dist/index.js"
+  },
+  "author": "Lucas Fellippe Alves Pereira Pedro Henrique Dantas Laranjeira Vinicius Marini Costa e Oliveira",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
