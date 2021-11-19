@@ -1,0 +1,8 @@
+
+const solicitarVantagem = () => {
+
+}
+
+const consultarSaldo = () => {
+
+}
