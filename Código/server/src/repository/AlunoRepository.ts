@@ -1,16 +1,25 @@
-import fsDB from '../db/fs-acess'
-import Aluno from '../models/Aluno';
+import prisma from '../db';
+import { Prisma } from '.prisma/client';
 
 class AlunoRepository {
-    static readonly modelName = 'aluno'
+    async cadastrar(data: any) {
+        return prisma.aluno.create({ data });
+    }
+
+    async listarAlunos() {
+        return prisma.aluno.findMany({
+            include: { instituicao: true},
+        });
+    }
+
     async solicitarVantagem(key: string) {
-        const result = await fsDB.read(AlunoRepository.modelName);
+        const result = {}
 
         return result;
     }
 
     async consultarSaldo(cpf: string) {
-        const result = await fsDB.read(AlunoRepository.modelName);
+        const result = {}
 
         return result;
     }

@@ -3,9 +3,9 @@ import api from '../controllers/EmpresaController';
 
 const router = Router();
 
-router.delete('/:cnpj/vantagens', api.deletarVantagem);
+router.get('/', api.listar)
 router.post('/:cnpj/vantagens', api.cadastrarVantagem);
-router.patch('/:cnpj/vantagens', api.alterarVantagem);
-router.delete('/:cnpj/vantagens', api.deletarVantagem);
+router.patch('/vantagens/:id', api.alterarVantagem);
+router.delete('/vantagens/:id', api.deletarVantagem);
 
 export default router;

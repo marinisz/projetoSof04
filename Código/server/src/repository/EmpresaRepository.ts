@@ -1,33 +1,41 @@
-import fsDB from '../db/fs-acess'
-import Empresa from '../models/Empresa';
+import prisma from '../db';
+import { Prisma } from '.prisma/client';
+import Vantagem from '../models/Vantagem';
 
+const vantagem = new Vantagem()
 class EmpresaRepository {
-    static readonly modelName = 'empresa'
-    async cadastrarVantagem(key: string, data: any) {
-        const result = fsDB.save(data);
+    static readonly modelName = 'empresa';
+    async cadastrar(data: any) {
+        return prisma.empresa.create({ data });
+    }
+
+    async cadastrarVantagem(id: string, data: Prisma.VantagemCreateInput) {
+        const result = await vantagem.criarVantagem({
+            data: { ...data, empresa: { connect: { id } } },
+            include: { empresa: true },
+        });
+
+        await prisma.cupom.create({ data: { vantagem: { connect: { id: result.id } } } });
 
         return result;
     }
 
-    async deletarVantagem(query: { cnpj: string; vid: string }) {
-        const result = fsDB.read(2 as any);
+    async deletarVantagem(id: string) {
+        const result = await vantagem.deletarVantagem(id)
 
         return result;
     }
 
-    async alterarVantagem(query: { cnpj: string; vid: string }, data: any) {
-        const json = await fsDB.read(EmpresaRepository.modelName)
-        const empresa = Empresa.fromJSON(json)
-        const result = fsDB.save(this.buildMessage(Empresa));
+    async alterarVantagem(id: string, data: Prisma.VantagemUncheckedUpdateInput) {
+        const result = await vantagem.atualizarVantagem({ where: { id }, data });
 
         return result;
     }
 
-    private buildMessage(data: any) {
-        return {
-            modelName: EmpresaRepository.modelName,
-            data
-        }
+    async listarEmpresas() {
+        return prisma.empresa.findMany({
+            include: { vantagens: { include: { cupons: { select: { codigo: true,  } } } } },
+        });
     }
 }
 

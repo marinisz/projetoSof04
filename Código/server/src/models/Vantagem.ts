@@ -1,30 +1,33 @@
-import Cupom from "./Cupom";
-import crypto from 'crypto';
+import prisma from '../db';
+import { Prisma } from '.prisma/client';
+import Cupom from './Cupom';
 
+const cupom = new Cupom()
 export default class Vantagem {
-    private cupons: Cupom[] = [];
-    private _id: string;
-    private nome: string;
-    private descricao: string;
+    async listarVantagens(opt: Prisma.VantagemFindManyArgs) {
+        const result = await prisma.vantagem.findMany(opt);
 
-    constructor(nome: string, descricao: string, cupom: Cupom) {
-        this.cupons.push(cupom);
-        this.nome = nome;
-        this.descricao = descricao;
-        this._id = crypto.randomInt(Number.MAX_SAFE_INTEGER).toString();
+        return result;
     }
+    async criarVantagem(opt: Prisma.VantagemCreateArgs) {
+        const result = await prisma.vantagem.create(opt);
 
-    get id() {
-        return this._id;
+        return result;
     }
-    set id(id: string) {
-        this._id = id;
-    }
+    async deletarVantagem(id: string, opt?: Prisma.VantagemDeleteArgs) {
+        const result = await prisma.$transaction([
+            prisma.cupom.deleteMany({ where: { vantagem: { id } } }),
+            prisma.vantagem.delete({ where: { id } }),
+        ]);
 
-    get JSON() {
-        return JSON.stringify({
-            id: this.id,
-            cupons: this.cupons,
-        });
+        return result;
+    }
+    async atualizarVantagem(opt: Prisma.VantagemUpdateArgs) {
+        const result = await prisma.vantagem.update(opt);
+
+        return result;
+    }
+    async findOne(id: string) {
+        const result = await prisma.vantagem.findFirst({ where: { id } });
     }
 }

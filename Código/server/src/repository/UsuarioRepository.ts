@@ -1,17 +1,13 @@
-import fsDB from '../db/fs-acess'
-import { MessageEntity } from '../interfaces/MessageStore';
-import Usuario from '../models/Usuario';
-
 class UsuarioRepository {
     static readonly modelName = 'usuario'
     async login(key: string, data: any) {
-        const result = fsDB.read(UsuarioRepository.modelName);
+        const result = {}
 
         return result;
     }
 
     async cadastrar(data: any) {
-        const result = fsDB.save(this.buildMessage(data));
+        const result = {}
 
         return result;
     }

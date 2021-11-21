@@ -1,20 +1,10 @@
+import prisma from '../db';
+import { Prisma } from '.prisma/client';
+
 export default class Cupom {
-    private codigo: number;
+    async deleteMany(opt: Prisma.CupomDeleteManyArgs) {
+        const result = await prisma.cupom.deleteMany(opt)
 
-    constructor(codigo: number) {
-        this.codigo = codigo;
-    }
-
-    static fromJSON(json: string) {
-        const data = JSON.parse(json);
-        const cupom = new Cupom(data.codigo);
-
-        return cupom;
-    }
-
-    get JSON() {
-        return JSON.stringify({
-            codigo: this.codigo,
-        });
+        return result
     }
 }

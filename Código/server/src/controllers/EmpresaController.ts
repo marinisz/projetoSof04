@@ -1,40 +1,50 @@
 import { RequestHandler } from 'express';
 import EmpresaRepo from '../repository/EmpresaRepository';
 
+const listar: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await EmpresaRepo.listarEmpresas();
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 const cadastrarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = EmpresaRepo.cadastrarVantagem(req.params.cnpj, req.body);
+        const result = await EmpresaRepo.cadastrarVantagem(req.params.cnpj, req.body);
 
-        return result;
+        return res.send(result);
     } catch (error) {
         next(error);
     }
 };
 
 const alterarVantagem: RequestHandler = async (req, res, next) => {
-    const query = { cnpj: req.params.cnpj, vid: req.params.vid };
     try {
-        const result = EmpresaRepo.alterarVantagem(query, req.body);
+        const result = EmpresaRepo.alterarVantagem(req.params.id, req.body);
 
-        return result;
+        return res.send(result);
     } catch (error) {
         next(error);
     }
 };
 
 const deletarVantagem: RequestHandler = async (req, res, next) => {
-    const query = { cnpj: req.params.cnpj, vid: req.params.vid };
     try {
-        const result = EmpresaRepo.deletarVantagem(query);
+        const result = EmpresaRepo.deletarVantagem(req.params.id);
 
-        return result;
+        return res.send(result);
     } catch (error) {
         next(error);
     }
 };
 
+
 export default {
     cadastrarVantagem,
     alterarVantagem,
     deletarVantagem,
+    listar
 };
