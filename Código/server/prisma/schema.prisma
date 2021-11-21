@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:../src/db/sistema.db"
+}
+
+model Aluno {
+    id            Int         @id @default(autoincrement())
+    nome          String
+    senha         String
+    cpf           String      @unique
+    rg            String      @unique
+    endereco      String
+    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+    instituicaoId String      @map("instituicao_id")
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
+
+    @@map("user")
+}
+
+model Empresa {
+    id        String     @id @default(cuid())
+    cnpj      String     @unique
+    nome      String
+    senha     String
+    vantagens Vantagem[]
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+
+    @@map("empresa")
+}
+
+model Vantagem {
+    id        String   @id @default(cuid())
+    valor Float
+    nome      String
+    descricao String
+    cupons    Cupom[]
+    empresa   Empresa? @relation(fields: [empresaId], references: [id])
+    empresaId String   @map("empresa_id")
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("vantagem")
+}
+
+model Cupom {
+    codigo     Int      @id @default(autoincrement())
+    vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
+    vantagemId String   @map("vantagem_id")
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@map("cupom")
+}
+
+model Instituicao {
+    alunos        Aluno[]
+    nome String
+    id            String         @id @default(cuid())
+    cnpj          String
+    cursos        Curso[]
+    departamentos Departamento[]
+
+    @@map("instituicao")
+}
+
+model Curso {
+    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+    instituicaoId String      @map("instituicao_id")
+    id            Int         @id @default(autoincrement())
+    nome          String
+
+    @@map("curso")
+}
+
+model Departamento {
+    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+    instituicaoId String      @map("instituicao_id")
+    id            String      @id @default(cuid())
+    nome          String
+    professores   Professor[]
+
+    @@map("departamento")
+}
+
+model Professor {
+    nome           String
+    cpf            String       @id
+    departamento   Departamento @relation(fields: [departamentoID], references: [id])
+    departamentoID String       @map("departamento_id")
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt
+
+    @@map("professor")
+}
