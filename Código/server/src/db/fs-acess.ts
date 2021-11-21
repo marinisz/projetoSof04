@@ -1,19 +1,18 @@
 import fs from 'fs-extra';
 import path from 'path';
-
-import { Event } from '../repository/Model';
+import { MessageEntity } from '../interfaces/MessageStore';
 
 class FSStore {
-    async save<T>(messag: Event<T>) {
+    async save<T>(msg: MessageEntity<T>) {
         const dir = await this.ensureDir();
-        const path = this.filePath(dir, messag.model);
-        const data = await fs.writeFile(path, messag.data);
+        const path = this.filePath(dir, msg.modelName);
+        const data = await fs.writeFile(path, msg.data);
         return data;
     }
 
-    async read<T>(messag: Event<T>) {
+    async read<T>(msg: MessageEntity<T>) {
         const dir = await this.ensureDir();
-        const path = this.filePath(dir, messag.model);
+        const path = this.filePath(dir, msg.modelName);
         const data = await fs.readFile(path, 'utf8');
 
         return data;
