@@ -3,9 +3,10 @@ import AlunoRepo from '../repository/AlunoRepository';
 
 const solicitarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = AlunoRepo.solicitarVantagem(req.params.cnpj);
+        const {useId, vantagemId } = req.query
+        const result = await AlunoRepo.solicitarVantagem(Number(useId), vantagemId as string);
 
-        return result;
+        return res.send(result);
     } catch (error) {
         next(error);
     }
@@ -13,9 +14,20 @@ const solicitarVantagem: RequestHandler = async (req, res, next) => {
 
 const consultarSaldo: RequestHandler = async (req, res, next) => {
     try {
-        const result = AlunoRepo.consultarSaldo(req.params.cpf);
+        const id = Number(req.params.id);
+        const result = await AlunoRepo.consultarSaldo(id);
 
-        return result;
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const listar: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await AlunoRepo.listarAlunos();
+
+        return res.send(result);
     } catch (error) {
         next(error);
     }
@@ -24,4 +36,5 @@ const consultarSaldo: RequestHandler = async (req, res, next) => {
 export default {
     solicitarVantagem,
     consultarSaldo,
+    listar,
 };

@@ -17,11 +17,12 @@ model Aluno {
     cpf           String      @unique
     rg            String      @unique
     endereco      String
+    saldo Float @default(1000.00)
     instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
     instituicaoId String      @map("instituicao_id")
     createdAt     DateTime    @default(now())
     updatedAt     DateTime    @updatedAt
-
+    vantagens Aluno_Vantagem[]
     @@map("user")
 }
 
@@ -45,10 +46,23 @@ model Vantagem {
     cupons    Cupom[]
     empresa   Empresa? @relation(fields: [empresaId], references: [id])
     empresaId String   @map("empresa_id")
+    alunos   Aluno_Vantagem[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@map("vantagem")
+}
+
+model Aluno_Vantagem {
+    aluno Aluno @relation(fields: [alunoId], references: [id])
+    alunoId Int @map("aluno_id")
+    vantagem Vantagem @relation(fields: [vantagemId], references: [id])
+    vantagemId String @map("vantagem_id")
+    valor Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([alunoId, vantagemId])
 }
 
 model Cupom {

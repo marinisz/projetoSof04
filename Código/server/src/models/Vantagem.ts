@@ -16,6 +16,7 @@ export default class Vantagem {
     }
     async deletarVantagem(id: string, opt?: Prisma.VantagemDeleteArgs) {
         const result = await prisma.$transaction([
+            prisma.aluno_Vantagem.deleteMany({where: {vantagem: {id}}}),
             prisma.cupom.deleteMany({ where: { vantagem: { id } } }),
             prisma.vantagem.delete({ where: { id } }),
         ]);
@@ -27,7 +28,9 @@ export default class Vantagem {
 
         return result;
     }
-    async findOne(id: string) {
-        const result = await prisma.vantagem.findFirst({ where: { id } });
+    async findOne(args: Prisma.VantagemFindFirstArgs) {
+        const result = await prisma.vantagem.findFirst(args);
+
+        return result
     }
 }
