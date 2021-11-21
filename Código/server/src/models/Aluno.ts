@@ -1,10 +1,10 @@
-import { IModel } from '../interfaces/IModel';
+import Usuario from './Usuario';
 
 export default class Aluno extends Usuario {
     constructor(
-        private nome: string,
-        private senha: string,
         private cpf: string,
+        protected nome: string,
+        protected senha: string,
         private rg: string,
         private endereco: string,
         private instituicao: string,
@@ -14,7 +14,7 @@ export default class Aluno extends Usuario {
         super(nome, senha);
     }
 
-    toString() {
+    get JSON() {
         return JSON.stringify({
             nome: this.nome,
             cpf: this.cpf,
@@ -24,5 +24,21 @@ export default class Aluno extends Usuario {
             saldo: this.saldo,
             curso: this.curso,
         });
+    }
+
+    static fromJSON(json: string) {
+        const data = JSON.parse(json);
+        const aluno = new Aluno(
+            data.cpf,
+            data.nome,
+            data.senha,
+            data.rg,
+            data.endereco,
+            data.instituicao,
+            data.saldo,
+            data.curso,
+        );
+
+        return aluno;
     }
 }
