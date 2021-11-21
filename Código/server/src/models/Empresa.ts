@@ -1,75 +1,38 @@
-import { IModel } from '../interfaces/IModel';
-import Usuario, { IUsuario } from './Usuario';
-
-interface IEmpresa extends IUsuario {
-    cnpj: string;
-    vantagens: Vantagem[];
-}
-
-const empresas: IEmpresa[] = [];
-
-class Vantagem {
-    private cupons: Cupom[] = [];
-    constructor(private nome: string, private descricao: string, cupom: Cupom) {
-        this.cupons.push(cupom);
-    }
-
-    toString() {
-        return JSON.stringify({
-            cupons: this.cupons,
-        });
-    }
-}
-
-class Cupom {
-    constructor(private codigo: string) {}
-
-    toString() {
-        codigo: this.codigo;
-    }
-}
+import Usuario from './Usuario';
+import Vantagem from './Vantagem';
 
 export default class Empresa extends Usuario {
+    private cnpj: string;
     private vantagens: Vantagem[];
 
-    constructor(protected nome: string, protected senha: string, private cnpj: string) {
+    constructor(
+        cnpj: string,
+        nome: string,
+        senha: string,
+        vantagens: Vantagem[] = [],
+    ) {
         super(nome, senha);
-        this.vantagens = [];
+        this.cnpj = cnpj;
+        this.vantagens = vantagens;
     }
 
-    update(cnpj: string, data: Partial<IEmpresa>) {
-        const result = empresas.findIndex(empresa => empresa.cnpj === cnpj);
+    static fromJSON(json: string) {
+        const data = JSON.parse(json);
+        const empresa = new Empresa(
+            data.cnpj,
+            data.nome,
+            data.senha,
+            data.vantagens,
+        );
 
-        if (result >= 0) {
-            return (empresas[result] = { ...empresas[result], ...data });
-        }
-    }
-
-    create(data: IEmpresa) {
-        const result = empresas.some(empresa => empresa.cnpj === data.cnpj);
-
-        if (!result) empresas.push(data);
-
-        return data;
-    }
-
-    read(cnpj: string) {
-        const result = empresas.find(empresa => empresa.cnpj === cnpj);
-        if (!result) throw new Error(`Empresa, com o ${cnpj}, não existe`);
-        return result;
-    }
-
-    delete(cnpj: string) {
-        const result = empresas.findIndex(empresa => empresa.cnpj === cnpj);
-        if (empresas[result]) {
-            delete empresas[result];
-        } else throw new Error(`Empresa, com o ${cnpj}, não existe`);
+        return empresa;
     }
 
     get JSON() {
         return JSON.stringify({
-            nome: this.nome,
             cnpj: this.cnpj,
+            nome: this.nome,
+            senha: this.senha,
             vantagens: this.vantagens,
         });
     }
