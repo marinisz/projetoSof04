@@ -1,0 +1,19 @@
+@baseUrl = /api/alunos/
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+
+### Listar Alunos
+GET  {{baseUrl}}/ HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Solicitar Vantagem
+GET  {{baseUrl}}/solicitarVantagem?useId=2&vantagemId=ckw9mdkfv00074ksv7wzslrly HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Consultar saldo
+GET  {{baseUrl}}/consultarSaldo/2 HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
