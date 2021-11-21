@@ -1,14 +1,16 @@
-import { RequestHandler } from "express";
-import Empresa from "../models/Empresa";
+import { RequestHandler } from 'express';
 
-class EmpressaController {
-    cadastrarVantagem() {};
+const cadastrarVantagem: RequestHandler = async (req, res, next) => {
+};
 
-    deletarVantagem() {};
+const alterarVantagem: RequestHandler = async (req, res, next) => {
+};
 
-    alterarVantagem() {};
+const deletarVantagem: RequestHandler = async (req, res, next) => {
+};
 
-    gerarCupom() {};
-}
-
-export default new EmpressaController();
+export default {
+    cadastrarVantagem,
+    alterarVantagem,
+    deletarVantagem
+};
