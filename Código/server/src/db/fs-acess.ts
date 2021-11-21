@@ -10,9 +10,9 @@ class FSStore {
         return data;
     }
 
-    async read<T>(msg: MessageEntity<T>) {
+    async read(modelName: string) {
         const dir = await this.ensureDir();
-        const path = this.filePath(dir, msg.modelName);
+        const path = this.filePath(dir, modelName);
         const data = await fs.readFile(path, 'utf8');
 
         return data;

@@ -1,8 +1,8 @@
 import fsDB from '../db/fs-acess'
-import { MessageEntity } from '../interfaces/MessageStore';
 import Empresa from '../models/Empresa';
 
 class EmpresaRepository {
+    static readonly modelName = 'empresa'
     async cadastrarVantagem(key: string, data: any) {
         const result = fsDB.save(data);
 
@@ -16,7 +16,7 @@ class EmpresaRepository {
     }
 
     async alterarVantagem(query: { cnpj: string; vid: string }, data: any) {
-        const json = await fsDB.read(this.buildMessage(data))
+        const json = await fsDB.read(EmpresaRepository.modelName)
         const empresa = Empresa.fromJSON(json)
         const result = fsDB.save(this.buildMessage(Empresa));
 
@@ -25,7 +25,7 @@ class EmpresaRepository {
 
     private buildMessage(data: any) {
         return {
-            modelName: 'empresa',
+            modelName: EmpresaRepository.modelName,
             data
         }
     }
