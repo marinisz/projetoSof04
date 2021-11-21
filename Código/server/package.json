@@ -15,6 +15,7 @@
   "author": "Lucas Fellippe Alves Pereira Pedro Henrique Dantas Laranjeira Vinicius Marini Costa e Oliveira",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/fs-extra": "^9.0.13",
     "eslint": "^8.2.0",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
+    "cors": "^2.8.5",
     "cuid": "^2.1.8",
     "express": "^4.17.1",
     "fs-extra": "^10.0.0"

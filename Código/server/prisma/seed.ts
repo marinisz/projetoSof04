@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 
 const dataSeed = [
     {
+        id: 'ckw9s2lm00000sgsvq0crxxk0',
         nome: 'PUC-Liberdade',
         cnpj: '35767091000170',
         alunos: [],
@@ -47,6 +48,7 @@ const dataSeed = [
         ],
     },
     {
+        id: 'ckw9s2lmk0019sgsvl64m3ncs',
         nome: 'PUC-Coração',
         cnpj: '48623243000102',
         alunos: [],
@@ -97,6 +99,7 @@ async function main() {
         const data = dataSeed[i];
         await prisma.instituicao.create({
             data: {
+                id: data.id,
                 cnpj: data.cnpj,
                 nome: data.nome,
                 alunos: {
