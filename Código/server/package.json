@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpile-only src/app.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "db:generate": "prisma db push & prisma db seed && prisma generate"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

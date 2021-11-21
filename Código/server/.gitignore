@@ -126,4 +126,5 @@ dist
 # Config
 /config/*.env
 
+/src/db/*.db
 # End of https://www.toptal.com/developers/gitignore/api/node
