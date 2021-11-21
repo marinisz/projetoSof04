@@ -4,6 +4,16 @@ import Vantagem from '../models/Vantagem';
 
 const vantagem = new Vantagem();
 class AlunoRepository {
+    getById(id: number) {
+        return prisma.aluno.findFirst({ where: { id } });
+    }
+    async atualizarAluno(id: number, data: Prisma.AlunoUpdateInput) {
+        return prisma.aluno.update({ where: { id }, data });
+    }
+    async deletarAluno(id: number) {
+        return prisma.aluno.delete({ where: { id } });
+    }
+
     async cadastrar(data: Prisma.AlunoCreateInput) {
         return prisma.aluno.create({
             data: {

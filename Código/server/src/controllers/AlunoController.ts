@@ -3,7 +3,7 @@ import AlunoRepo from '../repository/AlunoRepository';
 
 const solicitarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const {useId, vantagemId } = req.query
+        const { useId, vantagemId } = req.query;
         const result = await AlunoRepo.solicitarVantagem(Number(useId), vantagemId as string);
 
         return res.send(result);
@@ -23,7 +23,37 @@ const consultarSaldo: RequestHandler = async (req, res, next) => {
     }
 };
 
-const listar: RequestHandler = async (req, res, next) => {
+const getAlunoById: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await AlunoRepo.getById(Number(req.params.id));
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const atualizarAluno: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await AlunoRepo.atualizarAluno(Number(req.params.id), req.body);
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deletarAluno: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await AlunoRepo.deletarAluno(Number(req.params.id));
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const listarAlunos: RequestHandler = async (req, res, next) => {
     try {
         const result = await AlunoRepo.listarAlunos();
 
@@ -36,5 +66,8 @@ const listar: RequestHandler = async (req, res, next) => {
 export default {
     solicitarVantagem,
     consultarSaldo,
-    listar,
+    listarAlunos,
+    deletarAluno,
+    atualizarAluno,
+    getAlunoById
 };
