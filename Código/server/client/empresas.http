@@ -3,8 +3,11 @@
 @port = 3000
 @host = {{hostname}}:{{port}}
 
+@empresaID = COLOQUE O ID AQUI
+@vantagemID = COLOQUE O ID AQUI
+
 ### Cadastrar Vantageem
-POST {{baseUrl}}/ckw9lzzzy0002a4sval0fspi9/vantagens HTTP/1.1
+POST {{baseUrl}}/{{empresaID}}/vantagens HTTP/1.1
 Content-Type: application/json
 Host: {{host}}
 
@@ -15,7 +18,7 @@ Host: {{host}}
 }
 
 ### Atualizar Vantageem
-PATCH  {{baseUrl}}/vantagens/ckw9k3he20049ycsvq1p9rdw3 HTTP/1.1
+PATCH  {{baseUrl}}/vantagens/{{vantagemID}} HTTP/1.1
 Content-Type: application/json
 Host: {{host}}
 
@@ -24,11 +27,30 @@ Host: {{host}}
 }
 
 ### Deletar Vantageem
-DELETE  {{baseUrl}}/vantagens/ckw9m1wvh0008o0svni0e1pm5 HTTP/1.1
+DELETE  {{baseUrl}}/vantagens/{{vantagemID}} HTTP/1.1
 Content-Type: application/json
 Host: {{host}}
 
-###
+### Lista Empreesas
 GET  {{baseUrl}}/ HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Get Pelo Id
+GET  {{baseUrl}}/{{empresaID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Atualizar Empresa
+PUT   {{baseUrl}}/{{empresaID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "nome": "Teste Teste"
+}
+
+### Deletar Empresa
+DELETE  {{baseUrl}}/{{empresaID}} HTTP/1.1
 Content-Type: application/json
 Host: {{host}}

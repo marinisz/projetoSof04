@@ -2,9 +2,17 @@ import prisma from '../db';
 import { Prisma } from '.prisma/client';
 import Vantagem from '../models/Vantagem';
 
-const vantagem = new Vantagem()
+const vantagem = new Vantagem();
 class EmpresaRepository {
-    static readonly modelName = 'empresa';
+    getById(id: string) {
+        return prisma.empresa.findFirst({ where: { id } });
+    }
+    async atualizarEmpresa(id: string, data: Prisma.EmpresaUpdateInput) {
+        return prisma.empresa.update({ where: { id }, data });
+    }
+    async deletarEmpresa(id: string) {
+        return prisma.empresa.delete({ where: { id } });
+    }
     async cadastrar(data: any) {
         return prisma.empresa.create({ data });
     }
@@ -21,7 +29,7 @@ class EmpresaRepository {
     }
 
     async deletarVantagem(id: string) {
-        const result = await vantagem.deletarVantagem(id)
+        const result = await vantagem.deletarVantagem(id);
 
         return result;
     }
@@ -34,7 +42,7 @@ class EmpresaRepository {
 
     async listarEmpresas() {
         return prisma.empresa.findMany({
-            include: { vantagens: { include: { cupons: { select: { codigo: true,  } } } } },
+            include: { vantagens: { include: { cupons: { select: { codigo: true } } } } },
         });
     }
 }

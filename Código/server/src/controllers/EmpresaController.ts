@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import EmpresaRepo from '../repository/EmpresaRepository';
 
-const listar: RequestHandler = async (req, res, next) => {
+const listarEmpresas: RequestHandler = async (req, res, next) => {
     try {
         const result = await EmpresaRepo.listarEmpresas();
 
@@ -10,6 +10,38 @@ const listar: RequestHandler = async (req, res, next) => {
         next(error);
     }
 };
+
+const getEmpresaById: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await EmpresaRepo.getById(req.params.id);
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const atualizarEmpresa: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await EmpresaRepo.atualizarEmpresa(req.params.id, req.body);
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+const deletarEmpresa: RequestHandler = async (req, res, next) => {
+    try {
+        const result = await EmpresaRepo.deletarEmpresa(req.params.id);
+
+        return res.send(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 const cadastrarVantagem: RequestHandler = async (req, res, next) => {
     try {
@@ -46,5 +78,8 @@ export default {
     cadastrarVantagem,
     alterarVantagem,
     deletarVantagem,
-    listar
+    listarEmpresas,
+    atualizarEmpresa,
+    deletarEmpresa,
+    getEmpresaById
 };
