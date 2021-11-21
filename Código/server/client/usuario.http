@@ -1,0 +1,39 @@
+@baseUrl = /api/usuarios/
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+
+### Empresas
+POST {{baseUrl}}/cadastrar HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "cnpj": "74801241000178",
+    "nome": "Lucas Test",
+    "senha": "96465479"
+}
+
+### Alunos
+POST {{baseUrl}}/cadastrar HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "cpf": "00011122233",
+    "nome": "Lucas Aluno",
+    "senha": "96465479",
+    "rg": "000000000",
+    "endereco": "Sonia Silva Matos",
+    "instituicao": "ckw9lfwaa0000pcsv6e47zo30"
+}
+
+### Login
+POST  {{baseUrl}}/login HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "cnpj": "1",
+    "senha": "96465479"
+}

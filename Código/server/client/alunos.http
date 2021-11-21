@@ -1,0 +1,40 @@
+@baseUrl = /api/alunos/
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@alunoID = COLOQUE O ID AQUI
+@vantagemID = COLOQUE O ID AQUI
+
+### Listar Alunos
+GET  {{baseUrl}}/ HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Solicitar Vantagem
+GET  {{baseUrl}}/solicitarVantagem?useId={{alunoID}}&vantagemId={{vantagemID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Consultar saldo
+GET  {{baseUrl}}/consultarSaldo/{{alunoID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Get Pelo Id
+GET  {{baseUrl}}/{{alunoID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Atualizar Aluno
+PUT   {{baseUrl}}/{{alunoID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "nome": "Teste Teste"
+}
+
+### Deletar Aluno
+DELETE  {{baseUrl}}/{{alunoID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}

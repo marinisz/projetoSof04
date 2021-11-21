@@ -1,0 +1,56 @@
+@baseUrl = /api/empresas/
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+
+@empresaID = COLOQUE O ID AQUI
+@vantagemID = COLOQUE O ID AQUI
+
+### Cadastrar Vantageem
+POST {{baseUrl}}/{{empresaID}}/vantagens HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "nome": "desconto em livros",
+    "descricao": "Validos somente na plataforma Amazon",
+    "valor": 150.00
+}
+
+### Atualizar Vantageem
+PATCH  {{baseUrl}}/vantagens/{{vantagemID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "descricao": "Validos somente na plataforma Xbox e PC"
+}
+
+### Deletar Vantageem
+DELETE  {{baseUrl}}/vantagens/{{vantagemID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Lista Empreesas
+GET  {{baseUrl}}/ HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Get Pelo Id
+GET  {{baseUrl}}/{{empresaID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Atualizar Empresa
+PUT   {{baseUrl}}/{{empresaID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "nome": "Teste Teste"
+}
+
+### Deletar Empresa
+DELETE  {{baseUrl}}/{{empresaID}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
