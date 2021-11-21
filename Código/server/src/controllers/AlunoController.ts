@@ -3,8 +3,8 @@ import AlunoRepo from '../repository/AlunoRepository';
 
 const solicitarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const { useId, vantagemId } = req.query;
-        const result = await AlunoRepo.solicitarVantagem(Number(useId), vantagemId as string);
+        const { id, vid } = req.params;
+        const result = await AlunoRepo.solicitarVantagem(Number(id), vid as string);
 
         return res.send(result);
     } catch (error) {

@@ -4,7 +4,7 @@ import api from '../controllers/EmpresaController';
 const router = Router();
 
 router.get('/', api.listarEmpresas)
-router.get('/:id', api.listarEmpresas)
+router.get('/:id', api.getEmpresaById)
 router.put('/:id', api.atualizarEmpresa);
 router.delete('/:id', api.deletarEmpresa);
 router.post('/:cnpj/vantagens', api.cadastrarVantagem);
