@@ -36,3 +36,4 @@ else {
     console.info('Server running as a module');
     module.exports = { boot, shutdown, PORT };
 }
+
