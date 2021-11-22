@@ -15,7 +15,12 @@ export default class Aluno extends Usuario {
     async deletarAluno(id: number) {
         return prisma.aluno.delete({ where: { id } });
     }
+    async login(data: any) {
+        const usuario = await prisma.aluno.findUnique({ where: { cpf: data.key }, select: { senha: true } });
+        const ehAutentico = data.senha === usuario?.senha;
 
+        return ehAutentico;
+    }
     async cadastrar(data: Prisma.AlunoCreateInput) {
         return prisma.aluno.create({
             data: {

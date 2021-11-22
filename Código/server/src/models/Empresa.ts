@@ -7,7 +7,7 @@ import { Prisma } from '.prisma/client';
 const vantagem = new Vantagem();
 
 export default class Empresa extends Usuario {
-    getById(id: string) {
+    async getById(id: string) {
         return prisma.empresa.findFirst({ where: { id } });
     }
     async atualizarEmpresa(id: string, data: Prisma.EmpresaUpdateInput) {
@@ -15,6 +15,12 @@ export default class Empresa extends Usuario {
     }
     async deletarEmpresa(id: string) {
         return prisma.empresa.delete({ where: { id } });
+    }
+    async login(data: any) {
+        const usuario = await prisma.empresa.findUnique({ where: { cnpj: data.key }, select: { senha: true } });
+        const ehAutentico = data.senha === usuario?.senha;
+
+        return ehAutentico;
     }
     async cadastrar(data: any) {
         return prisma.empresa.create({ data });

@@ -1,13 +1,7 @@
+import { Empresa, Aluno } from ".prisma/client";
+
 export default abstract class Usuario{
-    async login(key: string, data: any) {
-        const result = {}
+    abstract login(data: any): Promise<boolean>
 
-        return result;
-    }
-
-    async cadastrar(data: any) {
-        const result = {}
-
-        return result;
-    }
+    abstract cadastrar(data: any): Promise<Empresa | Aluno>
 }

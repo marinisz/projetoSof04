@@ -18,11 +18,17 @@ export const cadastrar: RequestHandler = async (req, res, next) => {
 };
 
 export const login: RequestHandler = async (req, res, next) => {
+    const data = {
+        key: req.body.cnpj || req.body.cpf,
+        senha: req.body.senha,
+    };
     try {
         let result: any;
-        if (req.body.cnpj) {
-            result = await Empresa.login('', req.body);
-        } else result = await Aluno.login('', req.body);
+        if (data.key.length === 14) {
+            result = await Empresa.login(req.body);
+        } else if (data.key.length === 11) result = await Aluno.login(req.body);
+        else result = { error: { message: 'CPF ou CNPJ tem que ter tamanhos 11 e 14, respectivamente' } };
+
         return res.send(result);
     } catch (error) {
         next(error);
