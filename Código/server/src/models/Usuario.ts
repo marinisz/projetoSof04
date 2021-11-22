@@ -1,9 +1,13 @@
 export default abstract class Usuario{
-    protected nome: string;
-    protected senha: string;
+    async login(key: string, data: any) {
+        const result = {}
 
-    constructor(nome: string, senha: string) {
-        this.nome = nome
-        this.senha = senha
+        return result;
+    }
+
+    async cadastrar(data: any) {
+        const result = {}
+
+        return result;
     }
 }

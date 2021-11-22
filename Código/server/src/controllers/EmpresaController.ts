@@ -1,9 +1,11 @@
 import { RequestHandler } from 'express';
-import EmpresaRepo from '../repository/EmpresaRepository';
+import EmpresaModel from '../models/Empresa';
+
+const Empresa  = new EmpresaModel()
 
 const listarEmpresas: RequestHandler = async (req, res, next) => {
     try {
-        const result = await EmpresaRepo.listarEmpresas();
+        const result = await Empresa.listarEmpresas();
 
         return res.send(result);
     } catch (error) {
@@ -13,7 +15,7 @@ const listarEmpresas: RequestHandler = async (req, res, next) => {
 
 const getEmpresaById: RequestHandler = async (req, res, next) => {
     try {
-        const result = await EmpresaRepo.getById(req.params.id);
+        const result = await Empresa.getById(req.params.id);
 
         return res.send(result);
     } catch (error) {
@@ -23,7 +25,7 @@ const getEmpresaById: RequestHandler = async (req, res, next) => {
 
 const atualizarEmpresa: RequestHandler = async (req, res, next) => {
     try {
-        const result = await EmpresaRepo.atualizarEmpresa(req.params.id, req.body);
+        const result = await Empresa.atualizarEmpresa(req.params.id, req.body);
 
         return res.send(result);
     } catch (error) {
@@ -34,7 +36,7 @@ const atualizarEmpresa: RequestHandler = async (req, res, next) => {
 
 const deletarEmpresa: RequestHandler = async (req, res, next) => {
     try {
-        const result = await EmpresaRepo.deletarEmpresa(req.params.id);
+        const result = await Empresa.deletarEmpresa(req.params.id);
 
         return res.send(result);
     } catch (error) {
@@ -45,7 +47,7 @@ const deletarEmpresa: RequestHandler = async (req, res, next) => {
 
 const cadastrarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = await EmpresaRepo.cadastrarVantagem(req.params.cnpj, req.body);
+        const result = await Empresa.cadastrarVantagem(req.params.cnpj, req.body);
 
         return res.send(result);
     } catch (error) {
@@ -55,7 +57,7 @@ const cadastrarVantagem: RequestHandler = async (req, res, next) => {
 
 const alterarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = EmpresaRepo.alterarVantagem(req.params.id, req.body);
+        const result = Empresa.alterarVantagem(req.params.id, req.body);
 
         return res.send(result);
     } catch (error) {
@@ -65,7 +67,7 @@ const alterarVantagem: RequestHandler = async (req, res, next) => {
 
 const deletarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = EmpresaRepo.deletarVantagem(req.params.id);
+        const result = Empresa.deletarVantagem(req.params.id);
 
         return res.send(result);
     } catch (error) {
