@@ -9,6 +9,9 @@ import { basicErrorHandler } from './appsupport';
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+var path = require('path')
+const HTML_DIR = path.join(__dirname,'/public')
+app.use(express.static(HTML_DIR))
 app.use(express.json());
 app.use(cors());
 app.use('/api/', router);
@@ -37,3 +40,11 @@ else {
     module.exports = { boot, shutdown, PORT };
 }
 
+
+app.get('/alunos',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../public/AlunoFront/index.html'))
+})
+
+app.get('/empresas',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../public/EmpresaFront/index.html'))
+})

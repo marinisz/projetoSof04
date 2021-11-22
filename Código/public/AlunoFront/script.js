@@ -1,5 +1,5 @@
 var criar = document.querySelector("#criar")
-import axios from 'axios';
+import {axios} from 'axios';
 var alunos= []
 
 criar.addEventListener("click",()=>{
