@@ -1,9 +1,7 @@
-export default abstract class Usuario{
-    protected nome: string;
-    protected senha: string;
+import { Empresa, Aluno } from ".prisma/client";
 
-    constructor(nome: string, senha: string) {
-        this.nome = nome
-        this.senha = senha
-    }
+export default abstract class Usuario{
+    abstract login(data: any): Promise<boolean>
+
+    abstract cadastrar(data: any): Promise<Empresa | Aluno>
 }
