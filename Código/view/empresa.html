@@ -32,7 +32,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col-3 d-flex flex-row-reverse mt-2">
-          <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" class="btn btn-dark">Nova Empresa</button>
+          <button id="abrirModalCriar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" class="btn btn-dark">Novo Parceiro</button>
         </div>
       </div>
       <div class="mt-4">
@@ -40,39 +40,28 @@
               <table class="table table-striped w-100">
                   <thead>
                       <tr>
+                          <th>ID</th>
                           <th>Nome</th>
-                          <th>CPNJ</th>
+                          <th>CNPJ</th>
                           <th>Ação</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
-                          <td>Casas Baiano</td>
-                          <td>12312312333</td>
+                          <td id ="idEmpresa">1</td>
+                          <td id="nomeEmpresa">Ricardo Eletrico</td>
+                          <td id="cnpjEmpresa">123123123</td>
                           <td>
-                            <svg data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                            <svg id="iconEditar" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                               <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                             </svg>
-                              <svg id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                              <svg id="iconApagar" style="cursor:pointer" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                               </svg>
                           </td>
                       </tr>
-                      <tr>
-                        <td>Ricardo Elétrico</td>
-                        <td>11233321323</td>
-                        <td>
-                          <svg data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                          </svg>
-                            <svg id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                            </svg>
-                        </td>
-                    </tr>
                   </tbody>
-                  
-                  <!-- Modal Editar -->
+                  <!-- Modal criar -->
                   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -102,10 +91,40 @@
                       </div>
                     </div>
                   </div>
+                    <!-- Modal Editar -->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Cadastrar Empresa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-8">
+                                <input class="form-control" type="text" name="nomeEdit" id="nomeEdit" placeholder="Nome">
+                              </div>
+                              <div class="col-4">
+                                <input class="form-control" type="number" name="cnpjEdit" id="cnpjEdit" placeholder="CNPJ">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col mt-2">
+                                <input class="form-control" type="password" name="senhaEdit" id="senhaEdit" placeholder="Senha">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button id="editar" type="button" class="btn btn-success">Editar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
               </table>
           </div>
       </div>
-      <script src="script.js"></script>
+      <script src="/js/empresa.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
