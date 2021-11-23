@@ -99,7 +99,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button id="criar" type="button" class="btn btn-success">Criar</button>
+                            <button data-bs-dismiss="modal" id="criar" type="button" class="btn btn-success">Criar</button>
                           </div>
                         </div>
                       </div>
@@ -140,7 +140,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button id="editar" type="button" class="btn btn-success">
+                            <button onclick="editAluno()" id="editar" type="button" class="btn btn-success">
                               Editar
                             </button>
                           </div>
@@ -151,6 +151,65 @@
           </div>
       </div>
       <script type="module" src="/js/aluno.js"></script>
+      <script>
+        function deleteAluno(){
+          var xhr = new XMLHttpRequest()
+          if(confirm("Deseja excluir Aluno?")){
+              let id = document.querySelector("#idAluno").textContent
+              console.log(id);
+              xhr.open("DELETE", "/api/alunos/"+id,true)
+              xhr.onload = () =>{
+                  let resposta = xhr.response;
+              }
+              xhr.send(null);
+              location.reload();
+          }
+      }
+          function carregaAluno(){
+            var xhr = new XMLHttpRequest();
+            let id = document.getElementById("idAluno").value
+            xhr.open("GET", "/api/alunos/")
+            xhr.onload = function(){
+            let resposta = xhr.response;
+            let resultado = JSON.parse(resposta)
+            console.log(resultado[0]);
+            document.getElementById('nomeEdit').value=resultado[0].nome
+            document.getElementById('cepEdit').value=resultado[0].endereco
+            document.getElementById('instEdit').value=resultado[0].instituicao.nome
+            document.getElementById('senhaEdit').value=resultado[0].senha
+            document.getElementById('rgEdit').value=resultado[0].rg
+            document.getElementById('cpfEdit').value=resultado[0].cpf
+          }
+            xhr.send()
+          }
+          function editAluno(){
+          var xhr = new XMLHttpRequest();
+          let nome = document.getElementById('nomeEdit').value
+          let cep = document.getElementById('cepEdit').value
+          let inst = document.getElementById('instEdit').value
+          let senha = document.getElementById('senhaEdit').value
+          let cpf = document.getElementById('cpfEdit').value
+          let rg = document.getElementById('rgEdit').value
+          let aluno = {
+              nome:nome,
+              endereco:cep,
+              instituicao:inst,
+              rg:rg,
+              senha:senha,
+              cpf:cpf
+          }
+          let id = document.getElementById("idAluno").textContent
+          xhr.open("PUT", '/api/alunos/'+id, true);
+          xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+          xhr.onload = function () {
+              var users = JSON.parse(xhr.responseText);
+              if (xhr.readyState == 4 && xhr.status == "200") {
+              } 
+          }
+          xhr.send(JSON.stringify(aluno));
+          // location.reload();
+        }
+      </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
