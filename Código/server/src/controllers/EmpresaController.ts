@@ -57,7 +57,7 @@ const cadastrarVantagem: RequestHandler = async (req, res, next) => {
 
 const alterarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = Empresa.alterarVantagem(req.params.id, req.body);
+        const result = await Empresa.alterarVantagem(req.params.id, req.body);
 
         return res.send(result);
     } catch (error) {
@@ -67,7 +67,7 @@ const alterarVantagem: RequestHandler = async (req, res, next) => {
 
 const deletarVantagem: RequestHandler = async (req, res, next) => {
     try {
-        const result = Empresa.deletarVantagem(req.params.id);
+        const result = await Empresa.deletarVantagem(req.params.id);
 
         return res.send(result);
     } catch (error) {
