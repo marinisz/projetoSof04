@@ -5,7 +5,7 @@ var xhr = new XMLHttpRequest()
 var iconEditar = document.querySelector("#iconEditar");
 var iconApagar = document.querySelector("#iconApagar");
 var alunos= []
-var alunoBuscado = []
+var empresaBuscada = []
 var instituicoes = []
 
 window.onload = async function() {
@@ -99,14 +99,13 @@ async function retornaBuscado(id){
     fetch(url)
         .then(response=>response.json())
         .then(res=>{
-            alunoBuscado = res;
+            empresaBuscada = res;
             document.querySelector('#idAlunoEdit').value = id        
-            document.querySelector('#nomeEdit').value = alunoBuscado.nome         
-            document.querySelector('#cepEdit').value = alunoBuscado.endereco         
-            document.querySelector('#cpfEdit').value = alunoBuscado.cpf         
-            document.querySelector('#rgEdit').value = alunoBuscado.rg         
-            document.querySelector('#senhaEdit').value = alunoBuscado.senha         
-            document.querySelector('#nomeEdit').value = alunoBuscado.nome        
+            document.querySelector('#nomeEdit').value = empresaBuscada.nome         
+            document.querySelector('#cepEdit').value = empresaBuscada.endereco         
+            document.querySelector('#cpfEdit').value = empresaBuscada.cpf         
+            document.querySelector('#rgEdit').value = empresaBuscada.rg         
+            document.querySelector('#senhaEdit').value = empresaBuscada.senha       
         })
 }
 
@@ -119,13 +118,14 @@ async function deletaAluno(id){
               }).then(() => {
                  console.log('removed');
               }).catch(err => {
+                  
                 console.error(err)
               });
         }
         document.location.reload(true);
 }
 
-async function editaAluno(){
+async function edita(){
     let id = document.querySelector('#idAlunoEdit').value;
     let url = 'http://localhost:3000/api/alunos/'+id
     let nome = document.getElementById('nomeEdit').value

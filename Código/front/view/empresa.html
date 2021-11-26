@@ -47,19 +47,7 @@
                       </tr>
                   </thead>
                   <tbody id="corpoTabela">
-                      <tr>
-                          <td id ="idEmpresa">1</td>
-                          <td id="nomeEmpresa">Ricardo Eletrico</td>
-                          <td id="cnpjEmpresa">123123123</td>
-                          <td>
-                            <svg id="iconEditar" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                              <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                            </svg>
-                              <svg id="iconApagar" style="cursor:pointer" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                              </svg>
-                          </td>
-                      </tr>
+                      
                   </tbody>
                   <!-- Modal criar -->
                   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -100,6 +88,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
+                            <input id="idEmpresaEdit" style="display:none"></input>
                             <div class="row">
                               <div class="col-8">
                                 <input class="form-control" type="text" name="nomeEdit" id="nomeEdit" placeholder="Nome">
@@ -116,7 +105,7 @@
                           </div>
                           <div class="modal-footer">
                             <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button id="editar" type="button" class="btn btn-success">Editar</button>
+                            <button  onclick="editaEmpresa()" id="editar" type="button" class="btn btn-success">Editar</button>
                           </div>
                         </div>
                       </div>
