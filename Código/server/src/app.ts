@@ -48,3 +48,7 @@ app.get('/alunos',function(req,res){
 app.get('/empresas',function(req,res){
     res.sendFile(path.resolve(__dirname+'/../../front/view/empresa.html'))
 })
+
+app.get('/moedas',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../front/view/moedas.html'))
+})
