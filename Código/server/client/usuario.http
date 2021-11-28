@@ -20,10 +20,10 @@ Content-Type: application/json
 Host: {{host}}
 
 {
-    "cpf": "00011122233",
-    "nome": "Lucas Aluno",
+    "cpf": "00011122993",
+    "nome": "Lucas Novato",
     "senha": "96465479",
-    "rg": "000000000",
+    "rg": "000002200",
     "endereco": "Sonia Silva Matos",
     "instituicao": "ckw9s2lm00000sgsvq0crxxk0"
 }

@@ -1,5 +1,9 @@
 var alunos= []
+var aluno={
+    saldo:"",
+}
 var btnEnvia = document.getElementById("btnEnvia")
+
 window.onload = async function() {
     await buscaAlunos();
 };
@@ -22,15 +26,29 @@ async function buscaAlunos(){
        
 }
 
+async function enviaMoedas(id,x){
+    for(let i=0;i<alunos.length;i++){
+        if(alunos[i].id==id){
+            aluno=alunos[i]
+        }
+    }
+    let soma = parseFloat(aluno.saldo)+x
+    let envio={
+        saldo:soma
+    }
+    await fetch('/api/alunos/'+id, {
+        method: 'put',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+            body: JSON.stringify(envio)
+        });
+}
+
 btnEnvia.addEventListener("click", async ()=>{
     let optSelect = document.getElementById("alunosSelect").value
-    let quantia = document.getElementById("quantia").value
-    await fetch('/api/moedas/'+optSelect, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-        body: JSON.stringify(quantia)
-    });
+    let quantia = parseFloat(document.getElementById("quantia").value)
+    await enviaMoedas(optSelect,quantia)
+    
 })
