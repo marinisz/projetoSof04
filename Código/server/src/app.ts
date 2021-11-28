@@ -52,3 +52,11 @@ app.get('/empresas',function(req,res){
 app.get('/moedas',function(req,res){
     res.sendFile(path.resolve(__dirname+'/../../front/view/moedas.html'))
 })
+
+app.get('/',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../front/view/index.html'))
+})
+
+app.get('/extrato',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../front/view/extrato.html'))
+})
