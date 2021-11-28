@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 var path = require('path')
-const HTML_DIR = path.join(__dirname,'/../../public')
+const HTML_DIR = path.join(__dirname,'/../../front')
 app.use(express.static(HTML_DIR))
 app.use(express.json());
 app.use(cors());
@@ -42,9 +42,13 @@ else {
 
 
 app.get('/alunos',function(req,res){
-    res.sendFile(path.resolve(__dirname+'/../../view/aluno.html'))
+    res.sendFile(path.resolve(__dirname+'/../../front/view/aluno.html'))
 })
 
 app.get('/empresas',function(req,res){
-    res.sendFile(path.resolve(__dirname+'/../../view/empresa.html'))
+    res.sendFile(path.resolve(__dirname+'/../../front/view/empresa.html'))
+})
+
+app.get('/moedas',function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../../front/view/moedas.html'))
 })
