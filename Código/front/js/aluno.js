@@ -14,6 +14,7 @@ window.onload = async function() {
 };
 
 btnPostar.addEventListener("click",()=>{
+    console.log("criar aluno");
     let nome = document.getElementById('nome').value
     let cep = document.getElementById('cep').value
     let inst = document.getElementById('inst').value
@@ -28,7 +29,7 @@ btnPostar.addEventListener("click",()=>{
         senha:senha,
         cpf:cpf
     }
-    xhr.open('POST', '/api/usuarios/cadastrar/', true);
+    xhr.open('POST', 'http://localhost:3000/api/usuarios/cadastrar/', true);
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.onreadystatechange = function() {//Call a function when the state changes.
         if(xhr.readyState == 4 && xhr.status == 200) {

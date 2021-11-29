@@ -45,6 +45,7 @@ const atualizarAluno: RequestHandler = async (req, res, next) => {
     }
 };
 
+
 const deletarAluno: RequestHandler = async (req, res, next) => {
     try {
         const result = await Aluno.deletarAluno(Number(req.params.id));

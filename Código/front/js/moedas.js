@@ -62,7 +62,7 @@ async function enviaMoedas(id,x){
     let envio={
         saldo:soma
     }
-    await fetch('/api/alunos/'+id, {
+    await fetch('http://localhost:3000/api/alunos/'+id, {
         method: 'put',
         headers: {
           'Accept': 'application/json',
@@ -73,12 +73,12 @@ async function enviaMoedas(id,x){
     
     let motivoDaDoacao = document.getElementById("motivo").value
     let segundoEnvio={
-        alunoId:1,
+        alunoId:id,
         motivo: motivoDaDoacao,
         quantidade:x       
     }
 
-    await fetch('api/professores/enviarMoeda'+id, {
+    await fetch('http://localhost:3000/api/professores/enviarMoeda/'+this.professor, {
         method: 'patch',
         headers: {
             'Accept': 'application/json',
