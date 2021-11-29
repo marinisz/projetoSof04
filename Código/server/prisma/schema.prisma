@@ -2,136 +2,137 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:../src/db/sistema.db"
 }
 
 model Aluno {
-    id              Int               @id @default(autoincrement())
-    nome            String
-    senha           String
-    cpf             String            @unique
-    rg              String            @unique
-    endereco        String
-    saldo           Float             @default(0.00)
-    instituicao     Instituicao       @relation(fields: [instituicaoId], references: [id])
-    instituicaoId   String            @map("instituicao_id")
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
-    vantagens       Aluno_Vantagem[]
-    Professor_Aluno Professor_Aluno[]
+  id              Int               @id @default(autoincrement())
+  nome            String
+  senha           String
+  cpf             String            @unique
+  rg              String            @unique
+  endereco        String
+  saldo           Float             @default(0.00)
+  instituicao     Instituicao       @relation(fields: [instituicaoId], references: [id])
+  instituicaoId   String            @map("instituicao_id")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  vantagens       Aluno_Vantagem[]
+  Professor_Aluno Professor_Aluno[]
 
-    @@map("user")
+  @@map("user")
 }
 
 model Empresa {
-    id        String     @id @default(cuid())
-    cnpj      String     @unique
-    nome      String
-    senha     String
-    vantagens Vantagem[]
-    createdAt DateTime   @default(now())
-    updatedAt DateTime   @updatedAt
+  id        String     @id @default(cuid())
+  cnpj      String     @unique
+  nome      String
+  senha     String
+  vantagens Vantagem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
-    @@map("empresa")
+  @@map("empresa")
 }
 
 model Vantagem {
-    id        String           @id @default(cuid())
-    valor     Float
-    nome      String
-    descricao String
-    cupons    Cupom[]
-    empresa   Empresa?         @relation(fields: [empresaId], references: [id])
-    empresaId String           @map("empresa_id")
-    alunos    Aluno_Vantagem[]
-    createdAt DateTime         @default(now())
-    updatedAt DateTime         @updatedAt
+  id        String           @id @default(cuid())
+  valor     Float
+  nome      String
+  descricao String
+  cupons    Cupom[]
+  empresa   Empresa?         @relation(fields: [empresaId], references: [id])
+  empresaId String           @map("empresa_id")
+  alunos    Aluno_Vantagem[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 
-    @@map("vantagem")
+  @@map("vantagem")
 }
 
 model Aluno_Vantagem {
-    aluno      Aluno    @relation(fields: [alunoId], references: [id])
-    alunoId    Int      @map("aluno_id")
-    vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
-    vantagemId String   @map("vantagem_id")
-    valor      Float
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  aluno      Aluno    @relation(fields: [alunoId], references: [id])
+  alunoId    Int      @map("aluno_id")
+  vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
+  vantagemId String   @map("vantagem_id")
+  valor      Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    @@id([alunoId, vantagemId])
+  @@id([alunoId, vantagemId])
 }
 
 model Cupom {
-    codigo     Int      @id @default(autoincrement())
-    vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
-    vantagemId String   @map("vantagem_id")
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  codigo     Int      @id @default(autoincrement())
+  vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
+  vantagemId String   @map("vantagem_id")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    @@map("cupom")
+  @@map("cupom")
 }
 
 model Instituicao {
-    alunos        Aluno[]
-    nome          String
-    id            String         @id @default(cuid())
-    cnpj          String
-    cursos        Curso[]
-    departamentos Departamento[]
+  alunos        Aluno[]
+  nome          String
+  id            String         @id @default(cuid())
+  cnpj          String
+  cursos        Curso[]
+  departamentos Departamento[]
 
-    @@map("instituicao")
+  @@map("instituicao")
 }
 
 model Curso {
-    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
-    instituicaoId String      @map("instituicao_id")
-    id            Int         @id @default(autoincrement())
-    nome          String
+  instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+  instituicaoId String      @map("instituicao_id")
+  id            Int         @id @default(autoincrement())
+  nome          String
 
-    @@map("curso")
+  @@map("curso")
 }
 
 model Departamento {
-    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
-    instituicaoId String      @map("instituicao_id")
-    id            String      @id @default(cuid())
-    nome          String
-    professores   Professor[]
+  instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
+  instituicaoId String      @map("instituicao_id")
+  id            String      @id @default(cuid())
+  nome          String
+  professores   Professor[]
 
-    @@map("departamento")
+  @@map("departamento")
 }
 
 model Professor {
-    id              Int               @id @default(autoincrement())
-    nome            String
-    cpf             String            @unique
-    saldo           Float             @default(1000.00)
-    departamento    Departamento      @relation(fields: [departamentoID], references: [id])
-    departamentoID  String            @map("departamento_id")
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
-    Professor_Aluno Professor_Aluno[]
+  id              Int               @id @default(autoincrement())
+  nome            String
+  cpf             String            @unique
+  saldo           Float             @default(1000.00)
+  departamento    Departamento      @relation(fields: [departamentoID], references: [id])
+  departamentoID  String            @map("departamento_id")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Professor_Aluno Professor_Aluno[]
 
-    @@map("professor")
+  @@map("professor")
 }
 
 model Professor_Aluno {
-    id          String    @default(cuid())
-    aluno       Aluno     @relation(fields: [alunoId], references: [id])
-    alunoId     Int       @map("aluno_id")
-    professor   Professor @relation(fields: [professorId], references: [id])
-    professorId Int       @map("professor_id")
-    quantidade  Float
-    motivo      String
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
+  id         String    @default(cuid())
+  aluno      Aluno     @relation(fields: [alunoId], references: [id])
+  professor  Professor @relation(fields: [professorId], references: [id])
+  quantidade Float
+  motivo     String
 
-    @@unique([alunoId, professorId])
-    @@map("professor_aluno")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  alunoId     Int      @map("aluno_id")
+  professorId Int      @map("professor_id")
+
+  @@unique([alunoId, professorId])
+  @@map("professor_aluno")
 }
