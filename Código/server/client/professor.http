@@ -10,6 +10,11 @@ GET  {{baseUrl}}/ HTTP/1.1
 Content-Type: application/json
 Host: {{host}}
 
+### Get Pelo Id
+GET  {{baseUrl}}/{{profId}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
 ### Consultar saldo
 GET  {{baseUrl}}/consultarSaldo/{{profId}} HTTP/1.1
 Content-Type: application/json

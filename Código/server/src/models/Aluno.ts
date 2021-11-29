@@ -92,7 +92,7 @@ export default class Aluno extends Usuario {
     }
 
     async consultarSaldo(id: number) {
-        return prisma.aluno.findFirst({ where: { id }, select: { saldo: true } });
+        return prisma.aluno.findFirst({ where: { id }, select: { saldo: true, nome: true } });
     }
 
     private debaterSaldo(saldo: number, preco: number) {

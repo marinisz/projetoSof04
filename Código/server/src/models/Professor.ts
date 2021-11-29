@@ -8,17 +8,11 @@ const aluno = new Aluno();
 
 export default class Professor {
     getById(id: number) {
-        return prisma.aluno.findFirst({ where: { id } });
+        return prisma.professor.findFirst({ where: { id } });
     }
 
     async listarProfessores() {
-        return prisma.aluno.findMany({
-            include: {
-                instituicao: true,
-                vantagens: {
-                    select: { vantagem: { include: { empresa: true } }, valor: true, createdAt: true, updatedAt: true },
-                },
-            },
+        return prisma.professor.findMany({
         });
     }
 
@@ -42,6 +36,6 @@ export default class Professor {
     }
 
     async consultarSaldo(id: number) {
-        return prisma.professor.findFirst({ where: { id }, select: { saldo: true } });
+        return prisma.professor.findFirst({ where: { id }, select: { saldo: true, nome: true } });
     }
 }
