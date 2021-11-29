@@ -48,7 +48,7 @@ async function buscaEmpresas(){
                 let celula3 = novaLinha.insertCell(2);
                 celula3.innerHTML=empresas[i].cnpj
                 let celula4 = novaLinha.insertCell(3);
-                celula4.innerHTML=`<svg onclick="retornaBuscado(${i+1})" id="iconEditar" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                celula4.innerHTML=`<svg onclick="retornaBuscado("${empresas[i].id}")" id="iconEditar" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
               </svg>
                 <svg id="iconApagar" onclick="deletaEmpresa(${i+1})" style="cursor:pointer" id="icones" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -63,15 +63,16 @@ async function buscaEmpresas(){
 
 async function retornaBuscado(id){
     let url = 'http://localhost:3000/api/empresas/'+id
-    fetch(url)
-        .then(response=>response.json())
-        .then(res=>{
-            console.log(res);
-            empresaBuscada = res;
-            document.querySelector('#idEmpresaEdit').value = id        
-            document.querySelector('#nomeEdit').value = empresaBuscada.nome       
-            document.querySelector('#rgEdit').value = empresaBuscada.cnpj             
-        })
+    console.log(url);
+    // fetch(url)
+    //     .then(response=>response.json())
+    //     .then(res=>{
+    //         console.log(res);
+    //         empresaBuscada = res;
+    //         document.querySelector('#idEmpresaEdit').value = id        
+    //         document.querySelector('#nomeEdit').value = empresaBuscada.nome       
+    //         document.querySelector('#rgEdit').value = empresaBuscada.cnpj             
+    //     })
 }
 
 async function deletaEmpresa(id){
@@ -100,12 +101,13 @@ async function editaEmpresa(){
     }
     console.log(empresa);
     try {
-        let response = await fetch(url, {
+        await fetch(url, {
             method: "PUT",
-            body: JSON.stringify(empresa),
             headers: {
+                'Accept': 'application/json',
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(empresa),
         });
     } catch (err) {
     }

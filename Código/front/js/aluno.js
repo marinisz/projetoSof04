@@ -45,6 +45,7 @@ async function buscaAlunos(){
         .then(response=>response.json())
         .then(res=>{
             alunos = res;
+            console.log(alunos);
             var tabela = document.getElementById('corpoTabela')
             for(let i=0;i<alunos.length;i++){
                 let novaLinha = tabela.insertRow(0);
@@ -125,32 +126,31 @@ async function deletaAluno(id){
         document.location.reload(true);
 }
 
-async function edita(){
+async function editaAluno(){
     let id = document.querySelector('#idAlunoEdit').value;
     let url = 'http://localhost:3000/api/alunos/'+id
     let nome = document.getElementById('nomeEdit').value
     let cep = document.getElementById('cepEdit').value
-    let inst = document.getElementById('instEdit2').value
     let senha = document.getElementById('senhaEdit').value
     let cpf = document.getElementById('cpfEdit').value
     let rg = document.getElementById('rgEdit').value
     let aluno = {
         nome:nome,
         endereco:cep,
-        instituicao:inst,
         rg:rg,
         senha:senha,
         cpf:cpf
     }
-    console.log(aluno);
     try {
-        let response = await fetch(url, {
+        await fetch(url, {
             method: "PUT",
-            body: JSON.stringify(aluno),
             headers: {
+                'Accept': 'application/json',
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(aluno),
         });
     } catch (err) {
     }
+    document.location.reload(true);
 }
