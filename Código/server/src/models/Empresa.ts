@@ -45,7 +45,6 @@ export default class Empresa extends Usuario {
 
     async alterarVantagem(id: string, data: Prisma.VantagemUncheckedUpdateInput) {
         const result = await vantagem.atualizarVantagem({ where: { id }, data });
-
         return result;
     }
 

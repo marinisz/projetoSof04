@@ -7,22 +7,24 @@ generator client {
 
 datasource db {
     provider = "sqlite"
-    url      = "file:../src/db/sistema.db"
+    url      = env("DATABASE_URL")
 }
 
 model Aluno {
-    id            Int         @id @default(autoincrement())
-    nome          String
-    senha         String
-    cpf           String      @unique
-    rg            String      @unique
-    endereco      String
-    saldo Float @default(1000.00)
-    instituicao   Instituicao @relation(fields: [instituicaoId], references: [id])
-    instituicaoId String      @map("instituicao_id")
-    createdAt     DateTime    @default(now())
-    updatedAt     DateTime    @updatedAt
-    vantagens Aluno_Vantagem[]
+    id              Int               @id @default(autoincrement())
+    nome            String
+    senha           String
+    cpf             String            @unique
+    rg              String            @unique
+    endereco        String
+    saldo           Float             @default(0.00)
+    instituicao     Instituicao       @relation(fields: [instituicaoId], references: [id])
+    instituicaoId   String            @map("instituicao_id")
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    vantagens       Aluno_Vantagem[]
+    Professor_Aluno Professor_Aluno[]
+
     @@map("user")
 }
 
@@ -39,28 +41,28 @@ model Empresa {
 }
 
 model Vantagem {
-    id        String   @id @default(cuid())
-    valor Float
+    id        String           @id @default(cuid())
+    valor     Float
     nome      String
     descricao String
     cupons    Cupom[]
-    empresa   Empresa? @relation(fields: [empresaId], references: [id])
-    empresaId String   @map("empresa_id")
-    alunos   Aluno_Vantagem[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    empresa   Empresa?         @relation(fields: [empresaId], references: [id])
+    empresaId String           @map("empresa_id")
+    alunos    Aluno_Vantagem[]
+    createdAt DateTime         @default(now())
+    updatedAt DateTime         @updatedAt
 
     @@map("vantagem")
 }
 
 model Aluno_Vantagem {
-    aluno Aluno @relation(fields: [alunoId], references: [id])
-    alunoId Int @map("aluno_id")
-    vantagem Vantagem @relation(fields: [vantagemId], references: [id])
-    vantagemId String @map("vantagem_id")
-    valor Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    aluno      Aluno    @relation(fields: [alunoId], references: [id])
+    alunoId    Int      @map("aluno_id")
+    vantagem   Vantagem @relation(fields: [vantagemId], references: [id])
+    vantagemId String   @map("vantagem_id")
+    valor      Float
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 
     @@id([alunoId, vantagemId])
 }
@@ -77,7 +79,7 @@ model Cupom {
 
 model Instituicao {
     alunos        Aluno[]
-    nome String
+    nome          String
     id            String         @id @default(cuid())
     cnpj          String
     cursos        Curso[]
@@ -106,12 +108,30 @@ model Departamento {
 }
 
 model Professor {
-    nome           String
-    cpf            String       @id
-    departamento   Departamento @relation(fields: [departamentoID], references: [id])
-    departamentoID String       @map("departamento_id")
-    createdAt      DateTime     @default(now())
-    updatedAt      DateTime     @updatedAt
+    id              Int               @id @default(autoincrement())
+    nome            String
+    cpf             String            @unique
+    saldo           Float             @default(1000.00)
+    departamento    Departamento      @relation(fields: [departamentoID], references: [id])
+    departamentoID  String            @map("departamento_id")
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    Professor_Aluno Professor_Aluno[]
 
     @@map("professor")
+}
+
+model Professor_Aluno {
+    id          String    @default(cuid())
+    aluno       Aluno     @relation(fields: [alunoId], references: [id])
+    alunoId     Int       @map("aluno_id")
+    professor   Professor @relation(fields: [professorId], references: [id])
+    professorId Int       @map("professor_id")
+    quantidade  Float
+    motivo      String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+
+    @@unique([alunoId, professorId])
+    @@map("professor_aluno")
 }

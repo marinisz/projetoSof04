@@ -2,7 +2,7 @@
 @hostname = localhost
 @port = 3000
 @host = {{hostname}}:{{port}}
-@alunoID = COLOQUE O ID AQUI
+@alunoID = 1
 @vantagemID = COLOQUE O ID AQUI
 
 ### Listar Alunos
@@ -11,7 +11,7 @@ Content-Type: application/json
 Host: {{host}}
 
 ### Solicitar Vantagem
-GET  {{baseUrl}}/solicitarVantagem?useId={{alunoID}}&vantagemId={{vantagemID}} HTTP/1.1
+GET  {{baseUrl}}/solicitarVantagem/{{alunoID}}/{{vantagemID}} HTTP/1.1
 Content-Type: application/json
 Host: {{host}}
 

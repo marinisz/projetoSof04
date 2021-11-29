@@ -1,0 +1,27 @@
+@baseUrl = /api/professores/
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+
+@profId = 1
+
+### Listar Professores
+GET  {{baseUrl}}/ HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Consultar saldo
+GET  {{baseUrl}}/consultarSaldo/{{profId}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+### Enviar moeda
+PATCH {{baseUrl}}/enviarMoeda/{{profId}} HTTP/1.1
+Content-Type: application/json
+Host: {{host}}
+
+{
+    "alunoId": 1,
+    "motivo": "Pq eu gosto do aluno",
+    "quantidade": 750
+}
