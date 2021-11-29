@@ -2,10 +2,26 @@ var alunos= []
 var aluno={
     saldo:"",
 }
+var dadosProfessor={
+    saldo:"",
+    nome:""
+}
 var btnEnvia = document.getElementById("btnEnvia")
+var professor
 
 window.onload = async function() {
     await buscaAlunos();
+
+    var url = document.location.href,
+    params = url.split('?')[1].split('&'),
+    data = {}, tmp;
+    for (var i = 0, l = params.length; i < l; i++) {
+        tmp = params[i].split('=');
+        data[tmp[0]] = tmp[1];
+    }
+    this.professor = data.professor;
+
+    await buscaSaldo();
 };
 
 
@@ -23,7 +39,17 @@ async function buscaAlunos(){
                 selectAlunos.appendChild(opt)
             }
         })
-       
+}
+
+async function buscaSaldo(){
+    let url = 'http://localhost:3000/api/professores/consultarSaldo/'+this.professor
+    fetch(url)
+        .then(response=>response.json())
+        .then(res=>{
+            dadosProfessor=res;
+            document.getElementById("saldo").value = dadosProfessor.saldo
+            console.log(res);
+        })
 }
 
 async function enviaMoedas(id,x){
@@ -44,6 +70,22 @@ async function enviaMoedas(id,x){
         },
             body: JSON.stringify(envio)
         });
+    
+    let motivoDaDoacao = document.getElementById("motivo").value
+    let segundoEnvio={
+        alunoId:1,
+        motivo: motivoDaDoacao,
+        quantidade:x       
+    }
+
+    await fetch('api/professores/enviarMoeda'+id, {
+        method: 'patch',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(segundoEnvio)
+    });
 }
 
 btnEnvia.addEventListener("click", async ()=>{

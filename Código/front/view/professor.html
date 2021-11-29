@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Alunos</title>
+    <title>Professores</title>
   </head>
   <body class="m-4"> 
         <!-- Menu   -->
@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav">
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Gerenciar Alunos</a>
+                      <a class="nav-link active" aria-current="page" href="#">Gerenciar Professores</a>
                     </li>
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="#">Extrato</a>
@@ -32,7 +32,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col-3 d-flex flex-row-reverse mt-2">
-          <button id="abrirModalCriar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" class="btn btn-dark">Novo Aluno</button>
+          <button id="abrirModalCriar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" class="btn btn-dark">Novo Professor</button>
         </div>
       </div>
       <div class="mt-4">
@@ -43,7 +43,7 @@
                           <th>ID</th>
                           <th>Nome</th>
                           <th>CPF</th>
-                          <th>Instituição</th>
+                          <th>Departamento</th>
                           <th>Ação</th>
                       </tr>
                   </thead>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="row">
                               <div class="col mt-2">
-                                <select class="form-select" type="text" name="inst" id="inst" placeholder="Instituição">
+                                <select class="form-select" type="text" name="depart" id="depart" placeholder="Departamento">
 
                                 </select>
                               </div>
@@ -101,7 +101,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <input id="idAlunoEdit" style="display:none"></input>
+                            <input id="idProfessorEdit" style="display:none"></input>
                             <div class="row">
                               <div class="col">
                                 <input class="form-control" type="text" name="nomeEdit" id="nomeEdit" placeholder="Nome">
@@ -112,7 +112,7 @@
                             </div>
                             <div class="row">
                               <div class="col mt-2">
-                                <select class="form-select" type="text" name="instEdit2" id="instEdit2" placeholder="Instituição" readonly>
+                                <select class="form-select" type="text" name="departEdit2" id="departEdit2" placeholder="Departamento" readonly>
                                 </select>
                               </div>
                               <div class="col mt-2">
@@ -130,7 +130,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button onclick="editaAluno()" id="editar" type="button" class="btn btn-success">
+                            <button onclick="editaProfessor()" id="editar" type="button" class="btn btn-success">
                               Editar
                             </button>
                           </div>
@@ -140,7 +140,7 @@
               </table>
           </div>
       </div>
-      <script src="../js/aluno.js"></script>
+      <script src="../js/professor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
