@@ -10,6 +10,12 @@ export default class Aluno extends Usuario {
         return prisma.aluno.findFirst({
             where: { id },
             select: {
+                id: true,
+                cpf: true,
+                nome: true,
+                rg: true,
+                saldo: true,
+                endereco: true,
                 Professor_Aluno: {
                     select: {
                         motivo: true,
