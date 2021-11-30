@@ -4,6 +4,7 @@ import ProfessorModel from '../models/Professor';
 const Professor = new ProfessorModel();
 
 const enviarMoeda: RequestHandler = async (req, res, next) => {
+    debugger
     try {
         const id = Number(req.params.id);
         const { alunoId, quantidade, motivo } = req.body;
