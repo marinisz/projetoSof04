@@ -2,7 +2,10 @@ var btnCadastra = document.getElementById("btnCadastrar")
 var campoEmpresa= document.getElementById("campoDados");
 var empresa = [];
 window.onload = async function() {
-    await getEmpresa("ckwbckvqo0114toub2ejxl6tn")
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    console.log(id);
+    await getEmpresa(id)
 };
 
 async function getEmpresa(id){
