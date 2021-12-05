@@ -5,7 +5,6 @@ var empresas = [];
 var iconEditar = document.querySelector("#iconEditar");
 var iconApagar = document.querySelector("#iconApagar");
 
-
 window.onload = async function() {
     await buscaEmpresas()
 };
