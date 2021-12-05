@@ -73,7 +73,7 @@ async function enviaMoedas(id,x){
     
     let motivoDaDoacao = document.getElementById("motivo").value
     let segundoEnvio={
-        alunoId:id,
+        alunoId:parseInt(id),
         motivo: motivoDaDoacao,
         quantidade:x       
     }
