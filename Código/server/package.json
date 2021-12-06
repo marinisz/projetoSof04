@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --inspect --transpile-only src/app.ts",
+    "dev": "cross-env DEBUG=moedas:* ts-node-dev --inspect --transpile-only src/app.ts",
     "start": "node dist/index.js",
     "db:generate": "prisma db push & prisma db seed && prisma generate"
   },
@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
+    "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
     "@types/fs-extra": "^9.0.13",
     "@types/http-errors": "^1.8.1",
@@ -31,6 +32,7 @@
   "dependencies": {
     "@prisma/client": "^3.5.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "cuid": "^2.1.8",
     "express": "^4.17.1",
     "fs-extra": "^10.0.0",
