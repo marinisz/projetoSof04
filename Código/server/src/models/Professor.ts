@@ -12,8 +12,7 @@ export default class Professor {
     }
 
     async listarProfessores() {
-        return prisma.professor.findMany({
-        });
+        return prisma.professor.findMany({ include: { departamento: { select: { nome: true } } } });
     }
 
     async enviarMoeda(profId: number, alunoId: number, qtd: number, motivo: string) {
