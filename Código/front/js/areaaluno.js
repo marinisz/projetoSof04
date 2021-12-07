@@ -48,7 +48,7 @@ function organizaVantagens(){
     for(let i=0;i<vantagens.length;i++){
         frase+=`
         <div class="d-flex align-items-center border my-2">
-            <div class="col">
+            <div class="col p-4">
                 <div class="row">
                     Empresa: ${vantagens[i].nome}   
                 </div>  
@@ -61,9 +61,9 @@ function organizaVantagens(){
                 <div style="visibility: hidden">
                     ${vantagens[i].vantage.id}   
                 </div>  
-            </div>
-            <div class="col">
-                <button onclick="resgata(${vantagens[i].vantage.id})" class="btn btn-light" id="btnResgatar">Resgatar</button>
+                <div class="row">
+                    <button onclick="resgata(${vantagens[i].vantage.id})" class="btn btn-light" id="btnResgatar">Resgatar</button>  
+                </div>  
             </div>
         </div>
         
