@@ -19,6 +19,7 @@ async function getAluno(id){
             campoAluno.innerHTML=`
             <p>Nome: ${res.nome}</p>
             <p>CNPJ: ${res.cpf}</p>
+            <p>Saldo: ${res.saldo}</p>
             `    
         })
 }
@@ -37,7 +38,6 @@ async function getEmpresas(){
                     vantagens.push(vantagem)
                 }
             }
-            console.log(vantagens);
             organizaVantagens();
         })
 }
@@ -73,7 +73,9 @@ function organizaVantagens(){
 }
 
 function resgata(idVantagem){
+    console.log(idVantagem);
     console.log("chamei");
     let url = `/api/alunos/solicitarVantagem/${id}/${idVantagem}`
     console.log(url);
+    location.reload();
 }
