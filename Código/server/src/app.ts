@@ -63,3 +63,7 @@ app.get('/extrato', function (req, res) {
 app.get('/cadastrovantagem', function (req, res) {
     res.sendFile(path.resolve(__dirname + '/../../front/view/cadastrovantagem.html'));
 });
+
+app.get('/areaaluno', function (req, res) {
+    res.sendFile(path.resolve(__dirname + '/../../front/view/areaaluno.html'));
+});
