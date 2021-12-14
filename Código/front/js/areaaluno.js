@@ -5,9 +5,8 @@ var id = ""
 window.onload = async function() {
     const urlParams = new URLSearchParams(window.location.search);
     id = urlParams.get('id');
-    await getEmpresas();
     await getAluno(id)
-    
+    await getEmpresas();
 };
 
 async function getAluno(id){
@@ -16,11 +15,19 @@ async function getAluno(id){
         .then(response=>response.json())
         .then(res=>{
             aluno=res
+            console.log(res);
             campoAluno.innerHTML=`
             <p>Nome: ${res.nome}</p>
             <p>CNPJ: ${res.cpf}</p>
             <p>Saldo: ${res.saldo}</p>
+            <h3>Vantagens resgatadas</h3>\n
+            <div id="aVa"></div>
             `    
+            let text = ""
+            for(let i=0;i<aluno.vantagens.length;i++){
+                text+=`<p>Nome: ${aluno.vantagens[i].vantagem.nome}<br>Valor: ${aluno.vantagens[i].valor}<p>`
+            }
+            document.getElementById("aVa").innerHTML=text
         })
 }
     
@@ -44,10 +51,9 @@ async function getEmpresas(){
 
 function organizaVantagens(){
     let frase = ""
-    
     for(let i=0;i<vantagens.length;i++){
         frase+=`
-        <div class="d-flex align-items-center border my-2">
+        <div class="d-flex align-items-center bg-secondary rounded border border-dark my-2">
             <div class="col p-4">
                 <div class="row">
                     Empresa: ${vantagens[i].nome}   
@@ -62,7 +68,7 @@ function organizaVantagens(){
                     ${vantagens[i].vantage.id}   
                 </div>  
                 <div class="row">
-                    <button onclick="resgata(${vantagens[i].vantage.id})" class="btn btn-light" id="btnResgatar">Resgatar</button>  
+                    <button id="${vantagens[i].vantage.id}" onclick="resgata('${vantagens[i].vantage.id}')" class="btn btn-light" id="btnResgatar">Resgatar</button>  
                 </div>  
             </div>
         </div>
@@ -73,9 +79,34 @@ function organizaVantagens(){
 }
 
 function resgata(idVantagem){
-    console.log(idVantagem);
-    console.log("chamei");
     let url = `/api/alunos/solicitarVantagem/${id}/${idVantagem}`
-    console.log(url);
-    location.reload();
+    fetch(url)
+        .then(response=>response.json())
+        .then(res=>{
+            console.log(res.status);
+            document.location.reload(true);
+        }).catch(error =>{
+            alert("Vantagem já resgatada")
+        })
+}
+
+function confereVantagem(){
+    let alunoVantagens = aluno.vantagens
+    console.log(alunoVantagens);
+    let contador = 0;
+    let aux = [];
+    aux.push(vantagens[0])
+    for(let i = 0; i< vantagens.length;i++){
+        if(i>1){
+            aux.push(vantagens[i])
+        }
+        for(let j=0;j<alunoVantagens.length;j++){
+            if(aux[i]==alunoVantagens[j]){
+                aux.pop();
+            }else{
+                contador++;
+            }
+        }
+    }
+    console.log(aux);
 }
