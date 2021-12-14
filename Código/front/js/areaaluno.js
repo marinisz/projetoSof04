@@ -27,7 +27,16 @@ async function getAluno(id){
             for(let i=0;i<aluno.vantagens.length;i++){
                 text+=`<p>Nome: ${aluno.vantagens[i].vantagem.nome}<br>Valor: ${aluno.vantagens[i].valor}<p>`
             }
+            text+="<h3>Moedas Recebidas</h3><div id='outro'></div>"
             document.getElementById("aVa").innerHTML=text
+
+            let text2 = ""
+            console.log(aluno.Professor_Aluno);
+            for(let i=0;i<aluno.Professor_Aluno.length;i++){
+                text2+=`${i+1}) Valor: ${aluno.Professor_Aluno[i].quantidade}<p><p>Motivo: ${aluno.Professor_Aluno[i].motivo}<br>`
+            }
+            document.getElementById("outro").innerHTML=text2
+
         })
 }
     
