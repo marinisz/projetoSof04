@@ -1,4 +1,6 @@
 var alunos= []
+let prof = []
+let profSaldo = 0
 var aluno={
     saldo:"",
 }
@@ -15,11 +17,19 @@ window.onload = async function() {
     var url = document.location.href,
     params = url.split('?')[1].split('&'),
     data = {}, tmp;
+
     for (var i = 0, l = params.length; i < l; i++) {
         tmp = params[i].split('=');
         data[tmp[0]] = tmp[1];
     }
-    this.professor = data.professor;
+    this.professor = data;
+    let url2 = 'http://localhost:3000/api/professores/'+this.professor.id
+    fetch(url2)
+        .then(response=>response.json())
+        .then(res=>{
+            prof=res;
+            document.getElementById("nomeProf").innerHTML="Carteira de "+prof.nome
+        })
 
     await buscaSaldo();
 };
@@ -42,13 +52,13 @@ async function buscaAlunos(){
 }
 
 async function buscaSaldo(){
-    let url = 'http://localhost:3000/api/professores/consultarSaldo/'+this.professor
+    let url = 'http://localhost:3000/api/professores/consultarSaldo/'+this.professor.id
     fetch(url)
         .then(response=>response.json())
         .then(res=>{
             dadosProfessor=res;
-            document.getElementById("saldo").value = dadosProfessor.saldo
-            console.log(res);
+            document.getElementById("saldo").innerHTML ="Saldo:"+dadosProfessor.saldo + ",00"
+            profSaldo = res.saldo
         })
 }
 
@@ -62,6 +72,7 @@ async function enviaMoedas(id,x){
     let envio={
         saldo:soma
     }
+    if(x<profSaldo){
     await fetch('http://localhost:3000/api/alunos/'+id, {
         method: 'put',
         headers: {
@@ -70,27 +81,29 @@ async function enviaMoedas(id,x){
         },
             body: JSON.stringify(envio)
         });
-    
+
     let motivoDaDoacao = document.getElementById("motivo").value
     let segundoEnvio={
         alunoId:parseInt(id),
         motivo: motivoDaDoacao,
-        quantidade:x       
+        quantidade:x
     }
-
-    await fetch('http://localhost:3000/api/professores/enviarMoeda/'+this.professor, {
-        method: 'patch',
+    await fetch('http://localhost:3000/api/professores/enviarMoeda/'+this.professor.id, {
+        method: 'PATCH',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(segundoEnvio)
     });
+    }else{
+        alert("Saldo insuficiente")
+    }
 }
 
 btnEnvia.addEventListener("click", async ()=>{
     let optSelect = document.getElementById("alunosSelect").value
     let quantia = parseFloat(document.getElementById("quantia").value)
     await enviaMoedas(optSelect,quantia)
-    
+
 })

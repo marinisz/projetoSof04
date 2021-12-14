@@ -26,7 +26,7 @@ Content-Type: application/json
 Host: {{host}}
 
 {
-    "alunoId": 1,
+    "alunoId": 6,
     "motivo": "Pq eu gosto do aluno",
     "quantidade": 750
 }

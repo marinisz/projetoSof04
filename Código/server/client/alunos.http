@@ -2,7 +2,7 @@
 @hostname = localhost
 @port = 3000
 @host = {{hostname}}:{{port}}
-@alunoID = 1
+@alunoID = 14
 @vantagemID = COLOQUE O ID AQUI
 
 ### Listar Alunos

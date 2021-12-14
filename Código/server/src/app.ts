@@ -56,10 +56,6 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve(__dirname + '/../../front/view/index.html'));
 });
 
-app.get('/extrato', function (req, res) {
-    res.sendFile(path.resolve(__dirname + '/../../front/view/extrato.html'));
-});
-
 app.get('/cadastrovantagem', function (req, res) {
     res.sendFile(path.resolve(__dirname + '/../../front/view/cadastrovantagem.html'));
 });
